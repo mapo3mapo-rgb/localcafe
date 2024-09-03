@@ -62,6 +62,12 @@ footer {
   margin-top: 2rem;
 }
 
+@media only screen and (max-width: 1200px) {
+  main {
+    padding: 0 0.5rem;
+  }
+}
+
 /* 
   -------------------------------------------------------------------------------------------------------------------------------
   Header formatting - styling elements in header part of the page
@@ -393,7 +399,7 @@ textarea {
     width: 95%;
   }
   .click-button {
-    width: 30%;
+    width: 40%;
   }
 }
 
