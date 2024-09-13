@@ -11,12 +11,13 @@ html {
 
 h1,
 .caffee-header p {
-  font-family: "Seymour One", sans-serif;
+  font-family: "Noto Serif", sans-serif;
 }
 
 p {
   margin: 0;
   line-height: 1.8;
+  font-size: 1.1rem;
 }
 
 body {
@@ -149,6 +150,10 @@ header a:hover {
 
   h2 {
     margin: 0 1rem;
+  }
+
+  p {
+    font-size: 1rem;
   }
 }
 

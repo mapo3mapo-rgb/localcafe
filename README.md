@@ -51,3 +51,8 @@ To run Pythagorean Cafe project on your computer follow the steps:
 - Download repo from github
 - Extract it and open with a code editor (I use Visual Studio Code)
 - Run it with 'Live Server'
+
+## Deployment
+
+A version of the website is deployed using github pages.
+To visit my Local Cafe page <a href="https://r-janovskis.github.io/localcafe/" target="_blank">click here</a>.
