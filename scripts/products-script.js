@@ -121,11 +121,11 @@ function generateCheckOutForm() {
   payment +=
     '<label for="address">Billing Address: </label> <input id="address" name="address" type="text" required />';
   payment +=
-    '<label for="number">Card Number: </label> <input id="number" name="number" type="text" required />';
+    '<label for="card_number">Card Number: </label> <input id="card_number" name="card_number" type="text" required />';
   payment +=
-    '<label for="date">Expire Date: </label> <input id="date" name="date" type="text" placeholder="MM/YY" required />';
+    '<label for="expiration_date">Expire Date: </label> <input id="expiration_date" name="expiration_date" type="text" placeholder="MM/YY" required />';
   payment +=
-    '<label for="sec">Security Digits: </label> <input id="sec" name="sec" type="text" placeholder="XXX" required />';
+    '<label for="security_digits">Security Digits: </label> <input id="security_digits" name="security_digits" type="text" placeholder="XXX" required />';
   payment += "</form>";
 
   const buttons =
