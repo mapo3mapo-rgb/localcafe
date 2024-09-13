@@ -54,4 +54,5 @@ To run Pythagorean Cafe project on your computer follow the steps:
 
 ## Deployment
 
-A version of the website is deployed using github pages. to visit my Local Cafe page <a href="https://r-janovskis.github.io/localcafe/" target="_blank">click here</a>.
+A version of the website is deployed using github pages.
+To visit my Local Cafe page <a href="https://r-janovskis.github.io/localcafe/" target="_blank">click here</a>.
