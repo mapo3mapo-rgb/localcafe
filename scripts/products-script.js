@@ -191,26 +191,27 @@ function validateEmail() {
 
 function validateAddress() {
   const regExpresion = /^[a-zA-Z0-9\s,'-]*$/;
-  const adress = document.getElementById("adress");
+  const address = document.getElementById("address");
   console.log(
-    `${adress.value}, Regex Test ${regExpresion.test(
-      adress.value
-    )}, field ID: ${adress.id}`
+    `${address.value}, Regex Test ${regExpresion.test(
+      address.value
+    )}, field ID: ${address.id}`
   );
 
-  if (regExpresion.test(adress.value)) {
-    adress.classList.add("valid");
-    adress.classList.remove("invalid");
-    formValidationObject[adress.id] = true;
+  if (regExpresion.test(address.value)) {
+    address.classList.add("valid");
+    address.classList.remove("invalid");
+    formValidationObject[address.id] = true;
   } else {
-    adress.classList.add("invalid");
-    adress.classList.remove("valid");
-    formValidationObject[adress.id] = false;
+    address.classList.add("invalid");
+    address.classList.remove("valid");
+    formValidationObject[address.id] = false;
   }
 }
 
 function validateCardNumber() {
-  const regExpresion = /^\d{16}$/;
+  const regExpresion =
+    /(?<!\d)\d{16}(?!\d)|(?<!\d[ _-])(?<!\d)\d{4}(?=([_ -]))(?:\1\d{4}){3}(?![_ -]?\d)/;
   const cardNumber = document.getElementById("card_number");
   console.log(
     `${cardNumber.value}, Regex Test ${regExpresion.test(
@@ -226,6 +227,46 @@ function validateCardNumber() {
     cardNumber.classList.add("invalid");
     cardNumber.classList.remove("valid");
     formValidationObject[cardNumber.id] = false;
+  }
+}
+
+function validateExpirationDate() {
+  const regExpresion = /^\d{2}[./-]\d{2}$/;
+  const expirationDate = document.getElementById("expiration_date");
+  console.log(
+    `${expirationDate.value}, Regex Test ${regExpresion.test(
+      expirationDate.value
+    )}, field ID: ${expirationDate.id}`
+  );
+
+  if (regExpresion.test(expirationDate.value)) {
+    expirationDate.classList.add("valid");
+    expirationDate.classList.remove("invalid");
+    formValidationObject[expirationDate.id] = true;
+  } else {
+    expirationDate.classList.add("invalid");
+    expirationDate.classList.remove("valid");
+    formValidationObject[expirationDate.id] = false;
+  }
+}
+
+function validateSecurityCode() {
+  const regExpresion = /^\d{3}$/;
+  const securityCode = document.getElementById("security_digits");
+  console.log(
+    `${securityCode.value}, Regex Test ${regExpresion.test(
+      securityCode.value
+    )}, field ID: ${securityCode.id}`
+  );
+
+  if (regExpresion.test(securityCode.value)) {
+    securityCode.classList.add("valid");
+    securityCode.classList.remove("invalid");
+    formValidationObject[securityCode.id] = true;
+  } else {
+    securityCode.classList.add("invalid");
+    securityCode.classList.remove("valid");
+    formValidationObject[securityCode.id] = false;
   }
 }
 
@@ -255,6 +296,22 @@ function handlePurchase() {
       .addEventListener("change", validateFullName);
 
     document.getElementById("email").addEventListener("change", validateEmail);
+
+    document
+      .getElementById("address")
+      .addEventListener("change", validateAddress);
+
+    document
+      .getElementById("card_number")
+      .addEventListener("change", validateCardNumber);
+
+    document
+      .getElementById("expiration_date")
+      .addEventListener("change", validateExpirationDate);
+
+    document
+      .getElementById("security_digits")
+      .addEventListener("change", validateSecurityCode);
 
     // No items selected
   } else {
