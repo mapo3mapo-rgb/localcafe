@@ -115,17 +115,18 @@ function generateCheckOutForm() {
 
   payment += '<form id="payment-info" action="#">';
   payment +=
-    '<label for="name">Cardholder Name: </label> <input id="name" name="name" type="text" required />';
+    '<label for="name">Cardholder Name: </label> <input id="name" name="name" type="text" title="Full name: Firstname Lastname" required />';
   payment +=
-    '<label for="email">Email: </label> <input id="email" name="email" type="email" required />';
+    '<label for="email">Email: </label> <input id="email" name="email" type="email" title="Email address example: johndoe@abc.com" required />';
   payment +=
     '<label for="address">Billing Address: </label> <input id="address" name="address" type="text" required />';
   payment +=
-    '<label for="number">Card Number: </label> <input id="number" name="number" type="text" required />';
+    '<label for="card_number">Card Number: </label> <input id="card_number" name="card_number" type="text" title="Expected form XXXX-XXXX-XXXX-XXXX and 16 digits" required />';
   payment +=
-    '<label for="date">Expire Date: </label> <input id="date" name="date" type="text" placeholder="MM/YY" required />';
+    '<label for="expiration_date">Expire Date: </label> <input id="expiration_date" name="expiration_date" type="text" placeholder="MM/YY" title="Expected format MM/YY" required />';
   payment +=
-    '<label for="sec">Security Digits: </label> <input id="sec" name="sec" type="text" placeholder="XXX" required />';
+    '<label for="security_digits">Security Digits: </label> <input id="security_digits" name="security_digits" type="text" placeholder="XXX" title="You can find these 3 digits at the back of you credit/debit card" required />';
+
   payment += "</form>";
 
   const buttons =
@@ -136,6 +137,137 @@ function generateCheckOutForm() {
   content += buttons;
 
   return content;
+}
+
+const formValidationObject = {
+  name: false,
+  email: false,
+  address: false,
+  card_number: false,
+  expiration_date: false,
+  security_digits: false,
+};
+
+// Form field validation functions
+function validateFullName() {
+  const regExpresion = /^[a-zA-Z]+ [a-zA-Z]+$/;
+  const fullName = document.getElementById("name");
+  console.log(
+    `${fullName.value}, Regex Test ${regExpresion.test(
+      fullName.value
+    )}, field ID: ${fullName.id}`
+  );
+
+  if (regExpresion.test(fullName.value)) {
+    fullName.classList.add("valid");
+    fullName.classList.remove("invalid");
+    formValidationObject[fullName.id] = true;
+  } else {
+    fullName.classList.add("invalid");
+    fullName.classList.remove("valid");
+    formValidationObject[fullName.id] = false;
+  }
+}
+
+function validateEmail() {
+  const regExpresion = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+  const email = document.getElementById("email");
+  console.log(
+    `${email.value}, Regex Test ${regExpresion.test(email.value)}, field ID: ${
+      email.id
+    }`
+  );
+
+  if (regExpresion.test(email.value)) {
+    email.classList.add("valid");
+    email.classList.remove("invalid");
+    formValidationObject[email.id] = true;
+  } else {
+    email.classList.add("invalid");
+    email.classList.remove("valid");
+    formValidationObject[email.id] = false;
+  }
+}
+
+function validateAddress() {
+  const regExpresion = /^[a-zA-Z0-9\s,'-]*$/;
+  const address = document.getElementById("address");
+  console.log(
+    `${address.value}, Regex Test ${regExpresion.test(
+      address.value
+    )}, field ID: ${address.id}`
+  );
+
+  if (regExpresion.test(address.value)) {
+    address.classList.add("valid");
+    address.classList.remove("invalid");
+    formValidationObject[address.id] = true;
+  } else {
+    address.classList.add("invalid");
+    address.classList.remove("valid");
+    formValidationObject[address.id] = false;
+  }
+}
+
+function validateCardNumber() {
+  const regExpresion =
+    /(?<!\d)\d{16}(?!\d)|(?<!\d[ _-])(?<!\d)\d{4}(?=([_ -]))(?:\1\d{4}){3}(?![_ -]?\d)/;
+  const cardNumber = document.getElementById("card_number");
+  console.log(
+    `${cardNumber.value}, Regex Test ${regExpresion.test(
+      cardNumber.value
+    )}, field ID: ${cardNumber.id}`
+  );
+
+  if (regExpresion.test(cardNumber.value)) {
+    cardNumber.classList.add("valid");
+    cardNumber.classList.remove("invalid");
+    formValidationObject[cardNumber.id] = true;
+  } else {
+    cardNumber.classList.add("invalid");
+    cardNumber.classList.remove("valid");
+    formValidationObject[cardNumber.id] = false;
+  }
+}
+
+function validateExpirationDate() {
+  const regExpresion = /^\d{2}[./-]\d{2}$/;
+  const expirationDate = document.getElementById("expiration_date");
+  console.log(
+    `${expirationDate.value}, Regex Test ${regExpresion.test(
+      expirationDate.value
+    )}, field ID: ${expirationDate.id}`
+  );
+
+  if (regExpresion.test(expirationDate.value)) {
+    expirationDate.classList.add("valid");
+    expirationDate.classList.remove("invalid");
+    formValidationObject[expirationDate.id] = true;
+  } else {
+    expirationDate.classList.add("invalid");
+    expirationDate.classList.remove("valid");
+    formValidationObject[expirationDate.id] = false;
+  }
+}
+
+function validateSecurityCode() {
+  const regExpresion = /^\d{3}$/;
+  const securityCode = document.getElementById("security_digits");
+  console.log(
+    `${securityCode.value}, Regex Test ${regExpresion.test(
+      securityCode.value
+    )}, field ID: ${securityCode.id}`
+  );
+
+  if (regExpresion.test(securityCode.value)) {
+    securityCode.classList.add("valid");
+    securityCode.classList.remove("invalid");
+    formValidationObject[securityCode.id] = true;
+  } else {
+    securityCode.classList.add("invalid");
+    securityCode.classList.remove("valid");
+    formValidationObject[securityCode.id] = false;
+  }
 }
 
 // Function that handles click on 'To Checkout'
@@ -158,6 +290,28 @@ function handlePurchase() {
     document
       .getElementById("pop-up-submit")
       .addEventListener("click", handleSubmit);
+
+    document
+      .getElementById("name")
+      .addEventListener("change", validateFullName);
+
+    document.getElementById("email").addEventListener("change", validateEmail);
+
+    document
+      .getElementById("address")
+      .addEventListener("change", validateAddress);
+
+    document
+      .getElementById("card_number")
+      .addEventListener("change", validateCardNumber);
+
+    document
+      .getElementById("expiration_date")
+      .addEventListener("change", validateExpirationDate);
+
+    document
+      .getElementById("security_digits")
+      .addEventListener("change", validateSecurityCode);
 
     // No items selected
   } else {
@@ -196,16 +350,20 @@ function handleReturn() {
 function handleSubmit() {
   const popUp = document.getElementById("pop-up");
 
-  popUp.innerHTML = "<h2>Thank you for Shopping at Pythagorean Cafe!</h2>";
-  popUp.innerHTML +=
-    "<p>Your order will be on its way after we have processed the order!</p>";
+  // Check if all fields are filled in correctly
+  if (Object.values(formValidationObject).every((value) => value === true)) {
+    popUp.innerHTML = "<h2>Thank you for Shopping at Pythagorean Cafe!</h2>";
+    popUp.innerHTML +=
+      "<p>Your order will be on its way after we have processed the order!</p>";
 
-  popUp.innerHTML +=
-    '<button id="pop-up-close" class="click-button">Close</button>';
-
-  document
-    .getElementById("pop-up-close")
-    .addEventListener("click", handleClick);
+    popUp.innerHTML +=
+      '<button id="pop-up-close" class="click-button">Close</button>';
+    document
+      .getElementById("pop-up-close")
+      .addEventListener("click", handleClick);
+  } else {
+    alert("Some of the fields are missing or filled incrorrectly!");
+  }
 }
 
 function handleAdd(e) {
