@@ -117,15 +117,15 @@ function generateCheckOutForm() {
   payment +=
     '<label for="name">Cardholder Name: </label> <input id="name" name="name" type="text" title="Full name: Firstname Lastname" required />';
   payment +=
-    '<label for="email">Email: </label> <input id="email" name="email" type="email" title="Email address: johndoe@abc.com" required />';
+    '<label for="email">Email: </label> <input id="email" name="email" type="email" title="Email address example: johndoe@abc.com" required />';
   payment +=
     '<label for="address">Billing Address: </label> <input id="address" name="address" type="text" required />';
   payment +=
-    '<label for="card_number">Card Number: </label> <input id="card_number" name="card_number" type="text" required />';
+    '<label for="card_number">Card Number: </label> <input id="card_number" name="card_number" type="text" title="Expected form XXXX-XXXX-XXXX-XXXX and 16 digits" required />';
   payment +=
-    '<label for="expiration_date">Expire Date: </label> <input id="expiration_date" name="expiration_date" type="text" placeholder="MM/YY" required />';
+    '<label for="expiration_date">Expire Date: </label> <input id="expiration_date" name="expiration_date" type="text" placeholder="MM/YY" title="Expected format MM/YY" required />';
   payment +=
-    '<label for="security_digits">Security Digits: </label> <input id="security_digits" name="security_digits" type="text" placeholder="XXX" required />';
+    '<label for="security_digits">Security Digits: </label> <input id="security_digits" name="security_digits" type="text" placeholder="XXX" title="You can find these 3 digits at the back of you credit/debit card" required />';
 
   payment += "</form>";
 
@@ -186,6 +186,46 @@ function validateEmail() {
     email.classList.add("invalid");
     email.classList.remove("valid");
     formValidationObject[email.id] = false;
+  }
+}
+
+function validateAddress() {
+  const regExpresion = /^[a-zA-Z0-9\s,'-]*$/;
+  const adress = document.getElementById("adress");
+  console.log(
+    `${adress.value}, Regex Test ${regExpresion.test(
+      adress.value
+    )}, field ID: ${adress.id}`
+  );
+
+  if (regExpresion.test(adress.value)) {
+    adress.classList.add("valid");
+    adress.classList.remove("invalid");
+    formValidationObject[adress.id] = true;
+  } else {
+    adress.classList.add("invalid");
+    adress.classList.remove("valid");
+    formValidationObject[adress.id] = false;
+  }
+}
+
+function validateCardNumber() {
+  const regExpresion = /^\d{16}$/;
+  const cardNumber = document.getElementById("card_number");
+  console.log(
+    `${cardNumber.value}, Regex Test ${regExpresion.test(
+      cardNumber.value
+    )}, field ID: ${cardNumber.id}`
+  );
+
+  if (regExpresion.test(cardNumber.value)) {
+    cardNumber.classList.add("valid");
+    cardNumber.classList.remove("invalid");
+    formValidationObject[cardNumber.id] = true;
+  } else {
+    cardNumber.classList.add("invalid");
+    cardNumber.classList.remove("valid");
+    formValidationObject[cardNumber.id] = false;
   }
 }
 
