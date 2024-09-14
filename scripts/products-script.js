@@ -115,9 +115,9 @@ function generateCheckOutForm() {
 
   payment += '<form id="payment-info" action="#">';
   payment +=
-    '<label for="name">Cardholder Name: </label> <input id="name" name="name" type="text" required />';
+    '<label for="name">Cardholder Name: </label> <input id="name" name="name" type="text" title="Full name: Firstname Lastname" required />';
   payment +=
-    '<label for="email">Email: </label> <input id="email" name="email" type="email" required />';
+    '<label for="email">Email: </label> <input id="email" name="email" type="email" title="Email address: johndoe@abc.com" required />';
   payment +=
     '<label for="address">Billing Address: </label> <input id="address" name="address" type="text" required />';
   payment +=
@@ -126,6 +126,7 @@ function generateCheckOutForm() {
     '<label for="expiration_date">Expire Date: </label> <input id="expiration_date" name="expiration_date" type="text" placeholder="MM/YY" required />';
   payment +=
     '<label for="security_digits">Security Digits: </label> <input id="security_digits" name="security_digits" type="text" placeholder="XXX" required />';
+
   payment += "</form>";
 
   const buttons =
@@ -136,6 +137,36 @@ function generateCheckOutForm() {
   content += buttons;
 
   return content;
+}
+
+const formValidationObject = {
+  name: false,
+  email: false,
+  address: false,
+  card_number: false,
+  expiration_date: false,
+  security_digits: false,
+};
+
+// Form field validation functions
+function validateFullName() {
+  const regExpresion = /^[a-zA-Z]+ [a-zA-Z]+$/;
+  const fullName = document.getElementById("name");
+  console.log(
+    `${fullName.value}, Regex Test ${regExpresion.test(
+      fullName.value
+    )}, field ID: ${fullName.id}`
+  );
+
+  if (regExpresion.test(fullName.value)) {
+    fullName.classList.add("valid");
+    fullName.classList.remove("invalid");
+  } else {
+    fullName.classList.add("invalid");
+    fullName.classList.remove("valid");
+  }
+
+  //return regExpresion.test(fullName);
 }
 
 // Function that handles click on 'To Checkout'
@@ -158,6 +189,10 @@ function handlePurchase() {
     document
       .getElementById("pop-up-submit")
       .addEventListener("click", handleSubmit);
+
+    document
+      .getElementById("name")
+      .addEventListener("change", validateFullName);
 
     // No items selected
   } else {

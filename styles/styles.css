@@ -482,6 +482,14 @@ p {
   margin-right: 1rem;
 }
 
+.valid {
+  border: solid 2px green;
+}
+
+.invalid {
+  border: solid 2px red;
+}
+
 @media only screen and (max-width: 960px) {
   .card {
     width: 45%;
