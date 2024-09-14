@@ -350,16 +350,20 @@ function handleReturn() {
 function handleSubmit() {
   const popUp = document.getElementById("pop-up");
 
-  popUp.innerHTML = "<h2>Thank you for Shopping at Pythagorean Cafe!</h2>";
-  popUp.innerHTML +=
-    "<p>Your order will be on its way after we have processed the order!</p>";
+  // Check if all fields are filled in correctly
+  if (Object.values(formValidationObject).every((value) => value === true)) {
+    popUp.innerHTML = "<h2>Thank you for Shopping at Pythagorean Cafe!</h2>";
+    popUp.innerHTML +=
+      "<p>Your order will be on its way after we have processed the order!</p>";
 
-  popUp.innerHTML +=
-    '<button id="pop-up-close" class="click-button">Close</button>';
-
-  document
-    .getElementById("pop-up-close")
-    .addEventListener("click", handleClick);
+    popUp.innerHTML +=
+      '<button id="pop-up-close" class="click-button">Close</button>';
+    document
+      .getElementById("pop-up-close")
+      .addEventListener("click", handleClick);
+  } else {
+    alert("Some of the fields are missing or filled incrorrectly!");
+  }
 }
 
 function handleAdd(e) {
