@@ -161,12 +161,32 @@ function validateFullName() {
   if (regExpresion.test(fullName.value)) {
     fullName.classList.add("valid");
     fullName.classList.remove("invalid");
+    formValidationObject[fullName.id] = true;
   } else {
     fullName.classList.add("invalid");
     fullName.classList.remove("valid");
+    formValidationObject[fullName.id] = false;
   }
+}
 
-  //return regExpresion.test(fullName);
+function validateEmail() {
+  const regExpresion = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
+  const email = document.getElementById("email");
+  console.log(
+    `${email.value}, Regex Test ${regExpresion.test(email.value)}, field ID: ${
+      email.id
+    }`
+  );
+
+  if (regExpresion.test(email.value)) {
+    email.classList.add("valid");
+    email.classList.remove("invalid");
+    formValidationObject[email.id] = true;
+  } else {
+    email.classList.add("invalid");
+    email.classList.remove("valid");
+    formValidationObject[email.id] = false;
+  }
 }
 
 // Function that handles click on 'To Checkout'
@@ -193,6 +213,8 @@ function handlePurchase() {
     document
       .getElementById("name")
       .addEventListener("change", validateFullName);
+
+    document.getElementById("email").addEventListener("change", validateEmail);
 
     // No items selected
   } else {
