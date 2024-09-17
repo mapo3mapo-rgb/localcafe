@@ -35,6 +35,7 @@ There are several interactive element on the website
 - Menu page consists of 2 tabs that can be changed back and forth (Beverages & Food)
 - On shop page we have the most interactivity possible. Each card has 2 buttons to increase or decrease how many items we want to buy. When button 'To Checkout' (bottom-right corner) is pressed, a pop-up screen will apear that will walk you through the checkout procedure or with a message that nothing was selected.
 - On Contact page I have inserted a google map with Pythagorean cafe location (just please don't come looking for it, it's imaginary). Here we also have a contact form that is validated for an input (all fields must be filled). When button 'Submit' is clicked either we a missing field will be higlighted (default behaviour) or we will see a pop-up screen.
+- Validator that makes sure fields are filled in on 'Checkout' form.
 
 ## What's not here
 
@@ -42,7 +43,6 @@ In this project is only the front-end of the website. For a full website there w
 
 - User input checks on contact page
 - User input checks on the checkout pop-up from the shop page
-- Enforcing on providing all mandatory field in the checkout pop-up (currently it allows to submit it empty, would be disaster in a real workd production scenario)
 
 ## How to run it?
 
